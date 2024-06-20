@@ -1,1 +1,17 @@
+name: KoyuFlow
+on:
+    push:
+        branches: ['main']
+    workflow_dispatch:
 
+jobs:
+    koyu_build:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - name: single run
+              run: echo "Hello! KoyuFlow!"
+            - name: multi run
+              run: |
+                echo "Hello! Koyurun!"
+                echo "hello! hello! KoyuAction!"
