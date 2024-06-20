@@ -9,3 +9,14 @@ def koyureverse(s: str) -> str:
         str: 反転した文字列
     """
     return s[::-1]
+
+def koyuupper(s: str) -> str:
+    """こゆるんのアッパーケース関数
+
+    Args:
+        s (str): 大文字に変換する文字列
+
+    Returns:
+        str: 大文字に変換した文字列
+    """
+    return s.upper()
