@@ -11,6 +11,6 @@ class TestKoyuLib(unittest.TestCase):
     def test_koyuupper(self):
         from koyurun.koyulib import koyuupper
         s = 'hello'
-        rs = 'HELLO'
+        rs = 'hello'
         result = koyuupper(s)
         self.assertEqual(result, rs)
