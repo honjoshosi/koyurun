@@ -46,4 +46,4 @@ jobs:
         make html
     - name: Sync html to s3
       run: |
-        aws s3 sync docs/build/html s3://${{ env.S3_BUCKET }}/docs --delete --quiet
+        aws s3 sync sphinx/build/html s3://${{ env.S3_BUCKET }}/docs --delete --quiet
