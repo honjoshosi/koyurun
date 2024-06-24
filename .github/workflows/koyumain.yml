@@ -19,6 +19,10 @@ jobs:
       id-token: write
       contents: read
     steps:
+    - name: check variables
+      run: |
+        echo $AWS_ROLE_ARN
+        echo ${{ env.S3_BUCKET }}
     - uses: actions/checkout@v4
     - name: Configure AWS credentials from IAM Role
       uses: aws-actions/configure-aws-credentials@v1
