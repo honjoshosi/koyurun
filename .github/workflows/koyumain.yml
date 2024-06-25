@@ -52,7 +52,7 @@ jobs:
     - name: Replace Release Tag(main)
       run: |
         refs=`git ls-remote --tags | cut -f 2 | tail -n 1`
-        echo $refs
+        echo REFS: $refs
       if: github.ref == 'refs/heads/main'
     - name: Generate reStructuredText files
       run: sphinx-apidoc -f -o sphinx/source src
