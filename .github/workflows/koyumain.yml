@@ -18,8 +18,7 @@ env:
   S3_BUCKET: ${{ secrets.S3_BUCKET }}
 
 jobs:
-  build:
-
+  builddocs:
     runs-on: ubuntu-latest
     permissions:
       id-token: write
@@ -45,6 +44,10 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install sphinx pydata_sphinx_theme
+    - name: Replace Release Tag
+      run: |
+        sed -i -e s/{{RELEASE_TAG}}/\'${GITHUB_REF##*/}\'/ sphinx/source/conf.py
+        head -n 20 sphinx/source/conf.py
     - name: Generate reStructuredText files
       run: sphinx-apidoc -f -o sphinx/source src
     - name: Generate HTML files

@@ -16,7 +16,7 @@ sys.path.insert(0, os.path.abspath('../../src'))    # 変換するソースコ�
 project = 'koyurun'
 copyright = '2024, koyuru'
 author = 'koyuru'
-release = '0.0.1'
+release = {{RELEASE_TAG}}
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
