@@ -51,8 +51,10 @@ jobs:
       if: github.ref == 'refs/tags/*'
     - name: Replace Release Tag(main)
       run: |
-        refs=`git ls-remote --tags | cut -f 2 | tail -n 1`
-        echo REFS: $refs
+        ref_tags=`git ls-remote --tags | cut -f 2 | tail -n 1`
+        release_tag=${ref_tags##*/}
+        sed -i -e s/{{RELEASE_TAG}}/\'${release_tag}\'/ sphinx/source/conf.py
+        head -n 20 sphinx/source/conf.py
       if: github.ref == 'refs/heads/main'
     - name: Generate reStructuredText files
       run: sphinx-apidoc -f -o sphinx/source src
