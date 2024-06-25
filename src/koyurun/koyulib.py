@@ -1,6 +1,6 @@
 
 def koyureverse(s: str) -> str:
-    """こゆるんのリバース関数
+    """こゆるんのリバース関数(1)
 
     Args:
         s (str): 反転させる文字列
