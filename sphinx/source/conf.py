@@ -8,6 +8,9 @@
 
 import os
 import sys
+import importlib
+import inspect
+
 sys.path.insert(0, os.path.abspath('../../src'))    # 変換するソースコードがある場所を指定
 
 project = 'koyurun'
@@ -21,6 +24,7 @@ release = '0.0.1'
 extensions = [
     'sphinx.ext.autodoc',   # ソースコード読み込み用
     'sphinx.ext.napoleon',  # docstring パース用
+    'sphinx.ext.linkcode',
 ]
 
 templates_path = ['_templates']
@@ -36,3 +40,27 @@ html_theme_options = {
     "github_url": "https://github.com/Sassor/ssr-sv-enes-ana-v2",
 }
 html_static_path = ['_static']
+
+
+def linkcode_resolve(domain, info):
+    if domain != 'py':
+        return None
+    if not info['module']:
+        return None
+
+    try:
+        obj = importlib.import_module(info['module'])
+        for part in info['fullname'].split('.'):
+            obj = getattr(obj, part)
+        sourcelines = inspect.getsourcelines(obj)
+        startline = sourcelines[1]
+        endline = startline + len(sourcelines[0]) - 1
+    except Exception:
+        return None
+
+    filename = info['module'].replace('.', '/')
+
+    print(f"Filename: {filename}")
+    print(f"Sourceline: {sourcelines}")
+
+    return f"https://github.com/honjoshosi/koyurun/tree/main/src/{filename}.py#L{startline}-L{endline}"
