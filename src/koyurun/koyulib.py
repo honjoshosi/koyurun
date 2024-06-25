@@ -20,3 +20,15 @@ def koyuupper(s: str) -> str:
         str: 大文字に変換した文字列
     """
     return s.upper()
+
+
+def koyulower(s: str) -> str:
+    """こゆるんのロウアーケース関数
+
+    Args:
+        s (str): 小文字に変換する文字列
+
+    Returns:
+        str: 小文字に変換した文字列
+    """
+    return s.lower()
