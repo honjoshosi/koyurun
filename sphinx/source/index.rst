@@ -10,6 +10,7 @@ Welcome to koyurun's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   README.md
    koyurun
 
 Indices and tables
