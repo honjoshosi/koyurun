@@ -55,7 +55,7 @@ jobs:
       run: |
         sed -i -e s/{{RELEASE_TAG}}/\'${GITHUB_REF##*/}\'/ sphinx/source/conf.py
         head -n 20 sphinx/source/conf.py
-      if: github.ref == 'refs/tags/*'
+      if: startsWith(github.ref, 'refs/tags/')
     - name: Replace Release Tag(main)
       run: |
         ref_tags=`git ls-remote --tags | cut -f 2 | tail -n 1`
