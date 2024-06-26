@@ -25,6 +25,7 @@ extensions = [
     'sphinx.ext.autodoc',   # ソースコード読み込み用
     'sphinx.ext.napoleon',  # docstring パース用
     'sphinx.ext.linkcode',
+    'myst_parser'
 ]
 
 templates_path = ['_templates']
@@ -41,6 +42,10 @@ html_theme_options = {
 }
 html_static_path = ['_static']
 
+source_suffix = {
+    '.rst': 'restructuredtext',
+    '.md': 'markdown',
+}
 
 def linkcode_resolve(domain, info):
     if domain != 'py':
