@@ -19,7 +19,7 @@ jobs:
       ${{
         github.ref_name == 'develop' && 'development'
         || github.ref_name == 'main' && 'production'
-        || github.ref == 'release' && 'production'
+        || github.event_name == 'release' && 'production'
       }}
 
     steps:
