@@ -19,12 +19,14 @@ jobs:
       ${{
         github.ref_name == 'develop' && 'development'
         || github.ref_name == 'main' && 'production'
-        || github.ref_name == 'release' && 'production'
+        || github.ref == 'release' && 'production'
       }}
 
     steps:
       - name: check environment secrets & variables
         run: |
+          echo github: ${{ github }}
+          echo event: ${{ github.event_name}}
           echo ref_name: ${{ github.ref_name }}
           echo AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
           echo AWS_ROLE_ARN: ${{ secrets.AWS_ROLE_ARN }}
