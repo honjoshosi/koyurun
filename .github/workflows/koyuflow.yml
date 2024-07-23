@@ -12,7 +12,7 @@ jobs:
   buildtest:
     runs-on: ubuntu-latest
     environment:
-      name: development
+      name: production
     steps:
       - name: check environment secrets & variables
         run: |
