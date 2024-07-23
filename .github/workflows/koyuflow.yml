@@ -6,13 +6,22 @@ name: KoyuTest
 on:
   push:
     branches:
+      - "main"
       - "develop"
+  release:
+    types: [published]
+
 
 jobs:
   buildtest:
     runs-on: ubuntu-latest
-    environment:
-      name: production
+    environment: |-
+      ${{
+        github.ref_name == 'develop' && 'development'
+        || github.ref_name == 'main' && 'production'
+        || github.ref_name == 'release' && 'production'
+      }}
+
     steps:
       - name: check environment secrets & variables
         run: |
