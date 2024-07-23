@@ -16,6 +16,7 @@ jobs:
     steps:
       - name: check environment secrets & variables
         run: |
+          echo ref_name: ${{ github.ref_name }}
           echo AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
           echo AWS_ROLE_ARN: ${{ secrets.AWS_ROLE_ARN }}
           echo SECRET_KEY_ARN: ${{ secrets.SECRET_KEY_ARN }}
