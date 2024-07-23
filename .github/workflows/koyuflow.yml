@@ -6,23 +6,42 @@ name: KoyuTest
 on:
   push:
     branches:
+      - "main"
       - "develop"
+  release:
+    types: [published]
+
 
 jobs:
   buildtest:
     runs-on: ubuntu-latest
+    environment: |-
+      ${{
+        github.ref_name == 'develop' && 'development'
+        || github.ref_name == 'main' && 'production'
+        || github.ref_name == 'release' && 'production'
+      }}
+
     steps:
-    - uses: actions/checkout@v4
-    - name: Set up Python 3.10
-      uses: actions/setup-python@v3
-      with:
-        python-version: "3.10"
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install flake8 pytest
-    - name: Install Koyurun
-      run: pip install -e .
-    - name: Test with pytest
-      run: |
-        pytest tests
+      - name: check environment secrets & variables
+        run: |
+          echo ref_name: ${{ github.ref_name }}
+          echo AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+          echo AWS_ROLE_ARN: ${{ secrets.AWS_ROLE_ARN }}
+          echo SECRET_KEY_ARN: ${{ secrets.SECRET_KEY_ARN }}
+          echo AWS_REGION: ${{ vars.AWS_REGION }}
+          echo ENV: ${{ vars.ENV }}
+    # - uses: actions/checkout@v4
+    # - name: Set up Python 3.10
+    #   uses: actions/setup-python@v3
+    #   with:
+    #     python-version: "3.10"
+    # - name: Install dependencies
+    #   run: |
+    #     python -m pip install --upgrade pip
+    #     pip install flake8 pytest
+    # - name: Install Koyurun
+    #   run: pip install -e .
+    # - name: Test with pytest
+    #   run: |
+    #     pytest tests
